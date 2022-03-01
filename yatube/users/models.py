@@ -8,6 +8,11 @@ class User(AbstractUser):
         upload_to='users/',
         blank=True
     )
+    about = models.TextField(
+        verbose_name='Текст',
+        blank=True,
+        null=True,
+    )
     phone = models.CharField(max_length=12, blank=True)
     is_author = models.BooleanField(default=True)
 

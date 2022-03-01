@@ -14,14 +14,33 @@
     <meta name="msapplication-TileColor" content="#000">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %}YaTube{% endblock %}</title>
   </head>
   <body>
     {% include 'includes/header.html' %}
     <main>
-      {% block content %}
-        Контент не подвезли :(
-      {% endblock %}
+      <div id="contain">
+        {% block content %}
+          Контент не подвезли :(
+        {% endblock %}
+      </div>
+      <div class="site-overlay"></div>
+
+      <script src="{% static 'js/offside.js' %}"></script>
+      <script>
+          var offsideMenu = offside( '#menu', {
+              slidingElementsSelector: '#container, #results',
+              debug: true,
+              buttonsSelector: '.menu-btn, .menu-btn--close',
+              slidingSide: 'right',
+              beforeOpen: function(){},
+              beforeClose: function(){},
+          });
+
+          var overlay = document.querySelector('.site-overlay')
+              .addEventListener( 'click', offside.factory.closeOpenOffside );
+      </script>
     </main>
     {% include 'includes/footer.html' %}
   </body>
