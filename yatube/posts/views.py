@@ -8,7 +8,7 @@ from .utils import get_page_object
 
 
 def index(request):
-    title = 'Последние обновления на сайте'
+    # title = 'Последние обновления на сайте'
     template = 'posts/index.html'
     if 'index_page' in cache:
         post_list = cache.get('index_page')
@@ -19,7 +19,7 @@ def index(request):
         cache.set('index_page', post_list, 20)
     page_obj = get_page_object(request, post_list)
     context = {
-        'title': title,
+        # 'title': title,
         'page_obj': page_obj,
     }
     return render(request, template, context)

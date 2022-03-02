@@ -20,14 +20,12 @@
   <body>
     {% include 'includes/header.html' %}
     <main>
-      <div id="contain">
-        {% block content %}
-          Контент не подвезли :(
-        {% endblock %}
-      </div>
+      {% block content %}
+        Контент не подвезли :(
+      {% endblock %}
       <div class="site-overlay"></div>
 
-      <script src="{% static 'js/offside.js' %}"></script>
+      <script src="{% static 'js/offside.min.js' %}"></script>
       <script>
           var offsideMenu = offside( '#menu', {
               slidingElementsSelector: '#container, #results',
