@@ -5,11 +5,11 @@
   <div class="container py-5">
     <div class="mb-5">
       {% thumbnail author.photo "200x200" crop="center" upscale=True as im %}
-        <img class="" src="{{ im.url }}" alt="img">
+        <img class="author-photo" src="{{ im.url }}" alt="img">
       {% endthumbnail %}
+      <h1>{{ author.get_full_name }}</h1>
       {{ author.about|safe|escape }}
-      <h1>Все посты пользователя {{ author.get_full_name }}</h1>
-      <h3>Всего постов: {{ count }}</h3>
+      <h4>Всего постов: {{ count }}</h4>
       {% if request.user != author %}
         {% if following %}
           <a

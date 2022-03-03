@@ -15,22 +15,35 @@ li {list-style-type: none;}
     padding: 1.3rem 0;
     clear: both;
 }
-footer {
-    border-top: 1px dotted #ccc;
-}
 
 .username{
     padding: 1rem 0;
 }
 .username img{float: left; margin:0 .5rem 0 0;}
 .username span{display: block; margin: 3px 0 0 0;}
-
+.author-photo{
+    float: left;
+    margin: .5rem 2rem .5rem 0;
+}
 .logo{
     /*margin: .3rem auto 0;*/
     display: block;
     width: 150px;
     height: 44px;
     float:left;
+}
+.tech{
+    padding: 0;
+    margin: 2rem 0 0 0;
+}
+.tech li{
+    display: inline-block;
+}
+.tech img{
+    width: 50px;
+    height: 50px;
+    margin: 2rem .5rem;
+    opacity: .2;
 }
 .about, .user-photo{
     overflow: hidden;
