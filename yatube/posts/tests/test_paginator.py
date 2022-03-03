@@ -1,3 +1,5 @@
+import math
+
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import Client, TestCase
@@ -41,8 +43,10 @@ class PostPaginatorTests(TestCase):
 
     def test_posts_paginator(self):
         """Пагинатор передаёт верное количество записей на страницу."""
-        pages_count = Post.objects.count() // POSTS_PER_PAGE + 1
+        pages_count = math.ceil(Post.objects.count() / POSTS_PER_PAGE)
         posts_reminder = Post.objects.count() % POSTS_PER_PAGE
+        if posts_reminder == 0:
+            posts_reminder = POSTS_PER_PAGE
         reverse_names = {
             reverse('posts:index'): POSTS_PER_PAGE,
             reverse('posts:index') + f'?page={pages_count}': posts_reminder,
