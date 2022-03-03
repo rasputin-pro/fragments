@@ -6,7 +6,7 @@ class CreatedModel(models.Model):
     """Абстрактная модель. Добавляет дату создания."""
     created = models.DateTimeField(
         'Дата публикации',
-        default=timezone.now
+        auto_now_add=True,
     )
 
     class Meta:

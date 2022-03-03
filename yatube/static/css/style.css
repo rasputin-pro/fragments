@@ -15,6 +15,9 @@ li {list-style-type: none;}
     padding: 1.3rem 0;
     clear: both;
 }
+.article-header ul{
+    padding: 0 0 0 .5rem;
+}
 
 .username{
     padding: 1rem 0;
@@ -40,7 +43,7 @@ li {list-style-type: none;}
     display: inline-block;
 }
 .tech img{
-    width: 50px;
+    width: auto;
     height: 50px;
     margin: 2rem .5rem;
     opacity: .2;
