@@ -9,5 +9,4 @@ def year(request) -> Dict[str, int]:
         return {
             'year': timezone.now().year,
         }
-    else:
-        raise Exception()
+    raise Exception()

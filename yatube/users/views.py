@@ -21,6 +21,5 @@ class SignUp(CreateView):
         if user is None:
             return self.render_to_response(
                 self.get_context_data(form=form))
-        else:
-            login(self.request, user)
-            return redirect(self.get_success_url())
+        login(self.request, user)
+        return redirect(self.get_success_url())
