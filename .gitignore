@@ -145,10 +145,9 @@ dmypy.json
 
 .mypy_cache
 
-# ВРЕМЕННОЕ ИСКЛЮЧЕНИЕ ----------------------------------------
-# папки со статикой и медиа
+# папки со статикой, медиа и БД
 #static/
-#yatube/posts/static/
-yatube/media/cache
-#db.sqlite3
-# -------------------------------------------------------------
+yatube/posts/static/
+yatube/media/
+db.sqlite3
+dump.json
