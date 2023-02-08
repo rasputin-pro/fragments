@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "fragments"
+version = "0.1.0"
+description = "no description"
+authors = ["Andrey Rasputin <rasputin21@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+Django = "2.2.28"
+mixer = "7.1.2"
+Pillow = "9.3.0"
+pytest = "6.2.4"
+pytest-django = "4.4.0"
+pytest-pythonpath = "0.7.3"
+requests = "2.26.0"
+six = "1.16.0"
+sorl-thumbnail = "12.7.0"
+Faker = "12.0.1"
+
+django-debug-toolbar = "3.2.4"
+python-dotenv = "0.20.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^2.20.0"
+isort = "^5.11.3"
+#flake8 = "^6.0.0"
+black = "^22.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
