@@ -9,8 +9,17 @@ from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
 from ..models import Group, Post
-from .const import (AUTHOR, COMMENT_TEXT, EDITED_TEXT, GROUP_DESC, GROUP_SLUG,
-                    GROUP_TITLE, NEW_TEXT, POST_TEXT, USER)
+from .const import (
+    AUTHOR,
+    COMMENT_TEXT,
+    EDITED_TEXT,
+    GROUP_DESC,
+    GROUP_SLUG,
+    GROUP_TITLE,
+    NEW_TEXT,
+    POST_TEXT,
+    USER,
+)
 
 User = get_user_model()
 
@@ -54,37 +63,36 @@ class PostFormTests(TestCase):
         """Проверка формы создания поста автором."""
         posts_count = Post.objects.count()
         small_gif = (
-            b'\x47\x49\x46\x38\x39\x61\x01\x00'
-            b'\x01\x00\x00\x00\x00\x21\xf9\x04'
-            b'\x01\x0a\x00\x01\x00\x2c\x00\x00'
-            b'\x00\x00\x01\x00\x01\x00\x00\x02'
-            b'\x02\x4c\x01\x00\x3b'
+            b"\x47\x49\x46\x38\x39\x61\x01\x00"
+            b"\x01\x00\x00\x00\x00\x21\xf9\x04"
+            b"\x01\x0a\x00\x01\x00\x2c\x00\x00"
+            b"\x00\x00\x01\x00\x01\x00\x00\x02"
+            b"\x02\x4c\x01\x00\x3b"
         )
         uploaded_img = SimpleUploadedFile(
-            name='small.gif',
-            content=small_gif,
-            content_type='image/gif'
+            name="small.gif", content=small_gif, content_type="image/gif"
         )
         form_data = {
-            'text': NEW_TEXT,
-            'group': PostFormTests.group.id,
-            'image': uploaded_img,
+            "text": NEW_TEXT,
+            "group": PostFormTests.group.id,
+            "image": uploaded_img,
         }
         response = self.authorized_author.post(
-            reverse('posts:post_create'),
-            data=form_data,
-            follow=True
+            reverse("posts:post_create"), data=form_data, follow=True
         )
-        self.assertRedirects(response, reverse(
-            'posts:profile',
-            kwargs={'username': PostFormTests.author.username}
-        ))
-        post_obj_last = Post.objects.order_by('-id')[0]
+        self.assertRedirects(
+            response,
+            reverse(
+                "posts:profile",
+                kwargs={"username": PostFormTests.author.username},
+            ),
+        )
+        post_obj_last = Post.objects.order_by("-id")[0]
         data = {
             Post.objects.count(): posts_count + 1,
             post_obj_last.text: NEW_TEXT,
             post_obj_last.group.id: PostFormTests.group.id,
-            post_obj_last.image: 'posts/' + uploaded_img.__str__(),
+            post_obj_last.image: "posts/" + uploaded_img.__str__(),
         }
         self.check_equal(data)
 
@@ -92,12 +100,10 @@ class PostFormTests(TestCase):
         """Невалидная форма не создаёт пост."""
         posts_count = Post.objects.count()
         form_data = {
-            'text': '',
+            "text": "",
         }
         self.authorized_user.post(
-            reverse('posts:post_create'),
-            data=form_data,
-            follow=True
+            reverse("posts:post_create"), data=form_data, follow=True
         )
         self.assertEqual(Post.objects.count(), posts_count)
 
@@ -105,21 +111,22 @@ class PostFormTests(TestCase):
         """Проверка формы редактирования поста автором."""
         posts_count = Post.objects.count()
         form_data = {
-            'text': EDITED_TEXT,
-            'group': PostFormTests.group.id,
+            "text": EDITED_TEXT,
+            "group": PostFormTests.group.id,
         }
         response = self.authorized_author.post(
             reverse(
-                'posts:post_edit',
-                kwargs={'post_id': PostFormTests.post.id}
+                "posts:post_edit", kwargs={"post_id": PostFormTests.post.id}
             ),
             data=form_data,
-            follow=True
+            follow=True,
         )
-        self.assertRedirects(response, reverse(
-            'posts:post_detail',
-            kwargs={'post_id': PostFormTests.post.id}
-        ))
+        self.assertRedirects(
+            response,
+            reverse(
+                "posts:post_detail", kwargs={"post_id": PostFormTests.post.id}
+            ),
+        )
         post_obj = get_object_or_404(Post, id=PostFormTests.post.id)
         data = {
             Post.objects.count(): posts_count,
@@ -132,8 +139,10 @@ class PostFormTests(TestCase):
         """Гость не может создать пост."""
         posts_count = Post.objects.count()
         self.client.post(
-            reverse('posts:post_create'),
-            data={'text': NEW_TEXT, }
+            reverse("posts:post_create"),
+            data={
+                "text": NEW_TEXT,
+            },
         )
         self.assertEqual(Post.objects.count(), posts_count)
 
@@ -141,10 +150,11 @@ class PostFormTests(TestCase):
         """Гость не может редактировать пост."""
         self.client.post(
             reverse(
-                'posts:post_edit',
-                kwargs={'post_id': PostFormTests.post.id}
+                "posts:post_edit", kwargs={"post_id": PostFormTests.post.id}
             ),
-            data={'text': EDITED_TEXT, }
+            data={
+                "text": EDITED_TEXT,
+            },
         )
         data = {
             get_object_or_404(Post, id=PostFormTests.post.id).text: POST_TEXT,
@@ -155,10 +165,11 @@ class PostFormTests(TestCase):
         """Не автор не может редактировать пост."""
         self.authorized_user.post(
             reverse(
-                'posts:post_edit',
-                kwargs={'post_id': PostFormTests.post.id}
+                "posts:post_edit", kwargs={"post_id": PostFormTests.post.id}
             ),
-            data={'text': EDITED_TEXT, }
+            data={
+                "text": EDITED_TEXT,
+            },
         )
         data = {
             get_object_or_404(Post, id=PostFormTests.post.id).text: POST_TEXT,
@@ -170,10 +181,11 @@ class PostFormTests(TestCase):
         count = PostFormTests.post.comments.count()
         self.client.post(
             reverse(
-                'posts:add_comment',
-                kwargs={'post_id': PostFormTests.post.id}
+                "posts:add_comment", kwargs={"post_id": PostFormTests.post.id}
             ),
-            data={'text': COMMENT_TEXT, }
+            data={
+                "text": COMMENT_TEXT,
+            },
         )
         self.assertEqual(PostFormTests.post.comments.count(), count)
 
@@ -182,12 +194,13 @@ class PostFormTests(TestCase):
         count = PostFormTests.post.comments.count()
         self.authorized_user.post(
             reverse(
-                'posts:add_comment',
-                kwargs={'post_id': PostFormTests.post.id}
+                "posts:add_comment", kwargs={"post_id": PostFormTests.post.id}
             ),
-            data={'text': COMMENT_TEXT, }
+            data={
+                "text": COMMENT_TEXT,
+            },
         )
-        last_comment = PostFormTests.post.comments.order_by('-id')[0]
+        last_comment = PostFormTests.post.comments.order_by("-id")[0]
         data = {
             PostFormTests.post.comments.count(): count + 1,
             last_comment.text: COMMENT_TEXT,

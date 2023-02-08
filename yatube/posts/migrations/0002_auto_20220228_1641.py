@@ -11,42 +11,77 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('posts', '0001_initial'),
+        ("posts", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='posts', to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            model_name="post",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="posts",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Автор",
+            ),
         ),
         migrations.AddField(
-            model_name='post',
-            name='group',
-            field=models.ForeignKey(blank=True, help_text='Группа, к которой будет относиться пост', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='posts', to='posts.Group', verbose_name='Группа'),
+            model_name="post",
+            name="group",
+            field=models.ForeignKey(
+                blank=True,
+                help_text="Группа, к которой будет относиться пост",
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="posts",
+                to="posts.Group",
+                verbose_name="Группа",
+            ),
         ),
         migrations.AddField(
-            model_name='follow',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='following', to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            model_name="follow",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="following",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Автор",
+            ),
         ),
         migrations.AddField(
-            model_name='follow',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='follower', to=settings.AUTH_USER_MODEL, verbose_name='Подписчик'),
+            model_name="follow",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="follower",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Подписчик",
+            ),
         ),
         migrations.AddField(
-            model_name='comment',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            model_name="comment",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="comments",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Автор",
+            ),
         ),
         migrations.AddField(
-            model_name='comment',
-            name='post',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='posts.Post', verbose_name='Пост'),
+            model_name="comment",
+            name="post",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="comments",
+                to="posts.Post",
+                verbose_name="Пост",
+            ),
         ),
         migrations.AddConstraint(
-            model_name='follow',
-            constraint=models.UniqueConstraint(fields=('user', 'author'), name='unique_follows'),
+            model_name="follow",
+            constraint=models.UniqueConstraint(
+                fields=("user", "author"), name="unique_follows"
+            ),
         ),
     ]

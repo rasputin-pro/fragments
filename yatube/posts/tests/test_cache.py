@@ -25,10 +25,10 @@ class PostCacheTests(TestCase):
 
     def test_cache_index_page_obj(self):
         """Объекты главной страницы кэшируются"""
-        response_one = self.client.get(reverse('posts:index')).content
+        response_one = self.client.get(reverse("posts:index")).content
         self.post.delete()
-        response_two = self.client.get(reverse('posts:index')).content
+        response_two = self.client.get(reverse("posts:index")).content
         self.assertEqual(response_one, response_two)
         cache.clear()
-        response_three = self.client.get(reverse('posts:index')).content
+        response_three = self.client.get(reverse("posts:index")).content
         self.assertNotEqual(response_two, response_three)

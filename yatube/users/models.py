@@ -3,13 +3,9 @@ from django.db import models
 
 
 class User(AbstractUser):
-    photo = models.ImageField(
-        'Фото',
-        upload_to='users/',
-        blank=True
-    )
+    photo = models.ImageField("Фото", upload_to="users/", blank=True)
     about = models.TextField(
-        verbose_name='Текст',
+        verbose_name="Текст",
         blank=True,
         null=True,
     )
@@ -17,8 +13,8 @@ class User(AbstractUser):
     is_author = models.BooleanField(default=True)
 
     class Meta:
-        verbose_name = 'user'
-        verbose_name_plural = 'users'
+        verbose_name = "user"
+        verbose_name_plural = "users"
 
     def __str__(self):
         return self.username

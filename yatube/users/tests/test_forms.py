@@ -23,25 +23,23 @@ class UserFormTests(TestCase):
         """Валидная форма создает нового пользователя."""
         users_count = User.objects.count()
         form_data = {
-            'first_name': 'John',
-            'last_name': 'Doe',
-            'username': 'user',
-            'email': 'user@mail.ru',
-            'password1': 'tTgfwv1Mwhn81KED',
-            'password2': 'tTgfwv1Mwhn81KED',
+            "first_name": "John",
+            "last_name": "Doe",
+            "username": "user",
+            "email": "user@mail.ru",
+            "password1": "tTgfwv1Mwhn81KED",
+            "password2": "tTgfwv1Mwhn81KED",
         }
         response = self.guest_client.post(
-            reverse('users:signup'),
-            data=form_data,
-            follow=True
+            reverse("users:signup"), data=form_data, follow=True
         )
-        self.assertRedirects(response, reverse('posts:index'))
+        self.assertRedirects(response, reverse("posts:index"))
         self.assertEqual(User.objects.count(), users_count + 1)
         self.assertTrue(
             User.objects.filter(
-                first_name='John',
-                last_name='Doe',
-                username='user',
-                email='user@mail.ru',
+                first_name="John",
+                last_name="Doe",
+                username="user",
+                email="user@mail.ru",
             ).exists()
         )

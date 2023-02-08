@@ -30,11 +30,13 @@ class PostPaginatorTests(TestCase):
         )
         cls.posts = []
         for i in range(0, 23):
-            cls.posts.append(Post.objects.create(
-                text=POST_TEXT,
-                author=cls.author,
-                group=cls.group,
-            ))
+            cls.posts.append(
+                Post.objects.create(
+                    text=POST_TEXT,
+                    author=cls.author,
+                    group=cls.group,
+                )
+            )
 
     def setUp(self):
         self.authorized_author = Client()
@@ -48,26 +50,28 @@ class PostPaginatorTests(TestCase):
         if posts_reminder == 0:
             posts_reminder = POSTS_PER_PAGE
         reverse_names = {
-            reverse('posts:index'): POSTS_PER_PAGE,
-            reverse('posts:index') + f'?page={pages_count}': posts_reminder,
+            reverse("posts:index"): POSTS_PER_PAGE,
+            reverse("posts:index") + f"?page={pages_count}": posts_reminder,
             reverse(
-                'posts:group_list',
-                kwargs={'slug': PostPaginatorTests.group.slug}
+                "posts:group_list",
+                kwargs={"slug": PostPaginatorTests.group.slug},
             ): POSTS_PER_PAGE,
             reverse(
-                'posts:group_list',
-                kwargs={'slug': PostPaginatorTests.group.slug}
-            ) + f'?page={pages_count}': posts_reminder,
+                "posts:group_list",
+                kwargs={"slug": PostPaginatorTests.group.slug},
+            )
+            + f"?page={pages_count}": posts_reminder,
             reverse(
-                'posts:profile',
-                kwargs={'username': PostPaginatorTests.posts[0].author}
+                "posts:profile",
+                kwargs={"username": PostPaginatorTests.posts[0].author},
             ): POSTS_PER_PAGE,
             reverse(
-                'posts:profile',
-                kwargs={'username': PostPaginatorTests.posts[0].author}
-            ) + f'?page={pages_count}': posts_reminder,
+                "posts:profile",
+                kwargs={"username": PostPaginatorTests.posts[0].author},
+            )
+            + f"?page={pages_count}": posts_reminder,
         }
         for reverse_name, count in reverse_names.items():
             with self.subTest(reverse_name=reverse_name):
                 response = self.authorized_author.get(reverse_name)
-                self.assertEqual(len(response.context['page_obj']), count)
+                self.assertEqual(len(response.context["page_obj"]), count)

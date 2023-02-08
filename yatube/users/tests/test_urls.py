@@ -12,7 +12,7 @@ class UserURLTests(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.user = User.objects.create_user(username='user')
+        cls.user = User.objects.create_user(username="user")
 
     def setUp(self):
         self.guest_client = Client()
@@ -23,13 +23,13 @@ class UserURLTests(TestCase):
     def test_users_page_location_for_guest(self):
         """Доступность страниц неавторизованным пользователям."""
         url_names = {
-            '/auth/logout/',
-            '/auth/signup/',
-            '/auth/login/',
-            '/auth/password-reset/',
-            '/auth/password-reset/done/',
-            '/auth/reset/MQ/5y6-2d727de6f3fde18895c8/',
-            '/auth/reset/done/',
+            "/auth/logout/",
+            "/auth/signup/",
+            "/auth/login/",
+            "/auth/password-reset/",
+            "/auth/password-reset/done/",
+            "/auth/reset/MQ/5y6-2d727de6f3fde18895c8/",
+            "/auth/reset/done/",
         }
         for url in url_names:
             with self.subTest(url=url):
@@ -38,16 +38,16 @@ class UserURLTests(TestCase):
 
     def test_users_redirect_for_guest(self):
         """Редирект неавторизованных пользователей."""
-        response = self.guest_client.get('/auth/password-change/')
+        response = self.guest_client.get("/auth/password-change/")
         self.assertRedirects(
-            response, '/auth/login/?next=/auth/password-change/'
+            response, "/auth/login/?next=/auth/password-change/"
         )
 
     def test_users_page_location_for_user(self):
         """Доступность страниц авторизованным пользователям."""
         url_names = {
-            '/auth/password-change/',
-            '/auth/password-change/done/',
+            "/auth/password-change/",
+            "/auth/password-change/done/",
         }
         for url in url_names:
             with self.subTest(url=url):
@@ -57,16 +57,16 @@ class UserURLTests(TestCase):
     def test_users_page_template(self):
         """URL-адрес использует соответствующий шаблон."""
         temp_url_names = {
-            '/auth/password-reset/': 'users/password_reset_form.html',
-            '/auth/password-reset/done/': 'users/password_reset_done.html',
-            '/auth/reset/MQ/5y6-2d727de6f3fde18895c8/':
-                'users/password_reset_confirm.html',
-            '/auth/reset/done/': 'users/password_reset_complete.html',
-            '/auth/password-change/': 'users/password_change_form.html',
-            '/auth/password-change/done/': 'users/password_change_done.html',
-            '/auth/logout/': 'users/logged_out.html',
-            '/auth/signup/': 'users/signup.html',
-            '/auth/login/': 'users/login.html',
+            "/auth/password-reset/": "users/password_reset_form.html",
+            "/auth/password-reset/done/": "users/password_reset_done.html",
+            "/auth/reset/MQ/5y6-2d727de6f3fde18895c8/":
+                "users/password_reset_confirm.html",
+            "/auth/reset/done/": "users/password_reset_complete.html",
+            "/auth/password-change/": "users/password_change_form.html",
+            "/auth/password-change/done/": "users/password_change_done.html",
+            "/auth/logout/": "users/logged_out.html",
+            "/auth/signup/": "users/signup.html",
+            "/auth/login/": "users/login.html",
         }
         for url, template in temp_url_names.items():
             with self.subTest(url=url):

@@ -39,70 +39,67 @@ class PostFollowTest(TestCase):
         """Зарегистрированный пользователь может подписаться на автора."""
         self.authorized_user.get(
             reverse(
-                'posts:profile_follow',
-                kwargs={'username': PostFollowTest.author}
+                "posts:profile_follow",
+                kwargs={"username": PostFollowTest.author},
             )
         )
-        self.assertTrue(Follow.objects.filter(
-            author=self.author, user=self.user
-        ).exists())
+        self.assertTrue(
+            Follow.objects.filter(author=self.author, user=self.user).exists()
+        )
 
     def test_follower_unfollow(self):
         """Зарегистрированный пользователь может отписаться от автора."""
         self.authorized_follower.get(
             reverse(
-                'posts:profile_unfollow',
-                kwargs={'username': PostFollowTest.author}
+                "posts:profile_unfollow",
+                kwargs={"username": PostFollowTest.author},
             )
         )
-        self.assertFalse(Follow.objects.filter(
-            author=self.author, user=self.follower
-        ).exists())
+        self.assertFalse(
+            Follow.objects.filter(
+                author=self.author, user=self.follower
+            ).exists()
+        )
 
     def test_new_post_for_follower(self):
         """У подписанного пользователя появляется новый пост автора."""
-        response_one = self.authorized_follower.get(reverse(
-            'posts:follow_index'))
+        response_one = self.authorized_follower.get(
+            reverse("posts:follow_index")
+        )
         form_data = {
-            'text': NEW_TEXT,
+            "text": NEW_TEXT,
         }
         self.authorized_author.post(
-            reverse('posts:post_create'),
-            data=form_data,
-            follow=True
+            reverse("posts:post_create"), data=form_data, follow=True
         )
-        response_two = self.authorized_follower.get(reverse(
-            'posts:follow_index'))
+        response_two = self.authorized_follower.get(
+            reverse("posts:follow_index")
+        )
         self.assertEqual(
-            len(response_two.context['page_obj']),
-            len(response_one.context['page_obj']) + 1,
+            len(response_two.context["page_obj"]),
+            len(response_one.context["page_obj"]) + 1,
         )
 
     def test_no_new_post_for_user(self):
         """У неподписанного пользователя нет лишних постов."""
-        response_one = self.authorized_user.get(reverse(
-            'posts:follow_index'))
+        response_one = self.authorized_user.get(reverse("posts:follow_index"))
         form_data = {
-            'text': NEW_TEXT,
+            "text": NEW_TEXT,
         }
         self.authorized_author.post(
-            reverse('posts:post_create'),
-            data=form_data,
-            follow=True
+            reverse("posts:post_create"), data=form_data, follow=True
         )
-        response_two = self.authorized_user.get(reverse(
-            'posts:follow_index'))
+        response_two = self.authorized_user.get(reverse("posts:follow_index"))
         self.assertEqual(
-            len(response_two.context['page_obj']),
-            len(response_one.context['page_obj']),
+            len(response_two.context["page_obj"]),
+            len(response_one.context["page_obj"]),
         )
 
     def test_following_context(self):
         """Неподписанному пользователю following->False."""
         response = self.authorized_user.get(
             reverse(
-                'posts:profile',
-                kwargs={'username': PostFollowTest.author}
+                "posts:profile", kwargs={"username": PostFollowTest.author}
             )
         )
-        self.assertFalse(response.context['following'])
+        self.assertFalse(response.context["following"])

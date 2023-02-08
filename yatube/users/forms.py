@@ -11,11 +11,18 @@ class CreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('photo', 'first_name', 'last_name', 'username', 'email',
-                  'phone', 'about', )
+        fields = (
+            "photo",
+            "first_name",
+            "last_name",
+            "username",
+            "email",
+            "phone",
+            "about",
+        )
 
     def clean_username(self):
-        username = self.cleaned_data['username']
+        username = self.cleaned_data["username"]
 
         try:
             self.Meta.model.objects.get(username=username)
@@ -23,6 +30,6 @@ class CreationForm(UserCreationForm):
             return username
 
         raise forms.ValidationError(
-            self.error_messages['duplicate_username'],
-            code='duplicate_username',
+            self.error_messages["duplicate_username"],
+            code="duplicate_username",
         )
