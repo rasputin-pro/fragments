@@ -4,8 +4,8 @@ from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import Client, TestCase
 
-from ..models import Group, Post
-from .const import AUTHOR, GROUP_DESC, GROUP_SLUG, GROUP_TITLE, POST_TEXT, USER
+from posts.models import Group, Post
+from const import AUTHOR, GROUP_DESC, GROUP_SLUG, GROUP_TITLE, POST_TEXT, USER
 
 User = get_user_model()
 

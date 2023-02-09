@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from ..models import Group, Post
-from .const import (
+from posts.models import Group, Post
+from const import (
     GROUP_DESC,
     GROUP_HELP_T,
     GROUP_SLUG,

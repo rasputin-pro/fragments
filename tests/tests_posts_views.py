@@ -9,7 +9,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
-from ..models import Group, Post
+from posts.models import Group, Post
 from .const import (
     AUTHOR,
     GROUP_DESC,

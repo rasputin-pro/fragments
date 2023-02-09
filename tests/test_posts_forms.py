@@ -8,8 +8,8 @@ from django.shortcuts import get_object_or_404
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
-from ..models import Group, Post
-from .const import (
+from posts.models import Group, Post
+from const import (
     AUTHOR,
     COMMENT_TEXT,
     EDITED_TEXT,

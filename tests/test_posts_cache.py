@@ -3,8 +3,8 @@ from django.core.cache import cache
 from django.test import TestCase
 from django.urls import reverse
 
-from ..models import Post
-from .const import AUTHOR, POST_TEXT
+from posts.models import Post
+from const import AUTHOR, POST_TEXT
 
 User = get_user_model()
 

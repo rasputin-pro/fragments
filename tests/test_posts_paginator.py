@@ -7,8 +7,8 @@ from django.urls import reverse
 
 from yatube.settings import POSTS_PER_PAGE
 
-from ..models import Group, Post
-from .const import AUTHOR, GROUP_DESC, GROUP_SLUG, GROUP_TITLE, POST_TEXT
+from posts.models import Group, Post
+from const import AUTHOR, GROUP_DESC, GROUP_SLUG, GROUP_TITLE, POST_TEXT
 
 User = get_user_model()
 

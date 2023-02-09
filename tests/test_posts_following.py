@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from ..models import Follow, Post
-from .const import AUTHOR, FOLLOWER, LONG_TEXT, NEW_TEXT, USER
+from posts.models import Follow, Post
+from const import AUTHOR, FOLLOWER, LONG_TEXT, NEW_TEXT, USER
 
 User = get_user_model()
 
