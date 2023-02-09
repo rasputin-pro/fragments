@@ -5,30 +5,31 @@
 ___
 Учебный проект на базе фреймворка **Django** (Frontend & Backend).
 
-Fragments — многопользовательский блог. Проект предоставляет 
-зарегистрированным пользователям публиковать записи, подписываться на 
+Fragments — многопользовательский блог. Проект предоставляет
+зарегистрированным пользователям публиковать записи, подписываться на
 любимых авторов и отмечать понравившиеся публикации.
 
 ## Стек технологий:
 - Python 3.7
 - Django 2.2.28
-- SQLite
+- PostgreSQL
+- Docker
+- Nginx
 
 ## Как запустить проект:
-<details>
-    <summary><b>Клонируйте репозиторий</b></summary>
 
+---
+<details>
+    <summary><b>Локально через консоль:</b></summary>
+
+1. Клонируйте репозиторий
 ```commandline
 git clone git@github.com:rasputin-pro/fragments.git
 
 cd fragments
 ```
-</details>
-
-<details>
-    <summary><b>Создайте и активируйте виртуальное окружение</b></summary>
-
-```shell
+2. Создайте и активируйте виртуальное окружение
+```bash
 # Linux/MacOS
 python3 -m venv venv
 source venv/bin/activate
@@ -40,43 +41,39 @@ source venv/scripts/activate
 python -m pip install --upgrade pip
 ```
 > В проекте используется **Python** версии **3.7**
-</details>
-
-<details>
-    <summary>
-        <b>Установите зависимости из файла <code>requirements.txt</code></b>
-    </summary>
-
-```shell
+3. Установите зависимости из файла `requirements.txt`
+```bash
 pip install -r requirements.txt
 ```
-</details>
-
-<details>
-    <summary><b>Примените миграции</b></summary>
-
-```shell
+4. Примените миграции
+```bash
 # Linux/MacOS
 python3 yatube/manage.py migrate
 
 # Windows
 python yatube/manage.py migrate
 ```
-</details>
-
-<details>
-    <summary><b>Запустите программу</b></summary>
-
-```shell
+5. Запустите программу
+```bash
 python3 yatube/manage.py runserver
 ```
 </details>
 
+---
+
+<details>
+    <summary><b>Локально через Docker:</b></summary>
+
+1. Перейдите в папку infra_local
+2. Создайте файл `.env`
+</details>
+
+---
+
 ## Планы по развитию проекта:
 Проект планируется развивать с целью изучения возможностей Django.
-- Интегрировать pre_commit, PostgreSQL, CD/CI;
+- Интегрировать CD/CI;
 - Разместить сайт на боевом сервере;
 - Добавить возможность назначать публикациям множественные категории;
 - Реализовать комментарии к публикациям;
 - ...
-
