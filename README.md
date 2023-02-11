@@ -42,8 +42,13 @@ poetry shell
 ```
 2. Установите зависимости
 ```bash
-poetry install
+poetry install --extras "tests"
 ```
+> Дополнительные аргументы: `--extras`
+> 
+> `tests` - для установки библиотек тестирования
+> 
+> `debug` - для установки **django-debug-toolbar**
 3. Примените миграции
 ```bash
 python yatube/manage.py migrate
@@ -74,7 +79,8 @@ POSTGRES_PASSWORD=fGYWqrGsEQojcDg8
 DB_HOST=db
 DB_PORT=5432
 ```
-3. Выполните команду:
+3. В файле `/yatube/yatube/settings.py` смените значение переменной `STATE` на `docker`
+4. Выполните команду:
 ```bash
 docker compose up -d
 ```
@@ -82,6 +88,10 @@ docker compose up -d
 </details>
 
 ---
+
+## Тестирование:
+Тесты запускаются локально через консоль командой `pytest` из корня проекта.
+> В файле `/yatube/yatube/settings.py` значение переменной `STATE` должно быть: `local`
 
 ## Планы по развитию проекта:
 Проект планируется развивать с целью изучения возможностей Django.

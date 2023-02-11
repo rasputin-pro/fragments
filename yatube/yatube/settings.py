@@ -4,18 +4,18 @@ from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 
 
-STATE = 'debug'
-""" STATE 'local' - for local development.
-    STATE 'debug' - for debugging on docker.
-    STATE 'test' - for testing on docker.
-    STATE 'production' - for production release.
+STATE = 'local'
+""" STATES:
+    'local' - for local development.
+    'docker' - for debugging on docker.
+    'production' - for production release.
 """
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.getenv("SECRET_KEY") or get_random_secret_key()
 
-DEBUG = (True if STATE == 'local' or STATE == 'debug' else False)
+DEBUG = (True if STATE == 'local' or STATE == 'docker' else False)
 
 CACHES = {
     "default": {
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "core.apps.CoreConfig",
     "about.apps.AboutConfig",
     "sorl.thumbnail",
-    "debug_toolbar",
+    # "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -49,7 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 # INTERNAL_IPS = [
