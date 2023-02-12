@@ -18,7 +18,7 @@ Fragments — многопользовательский блог. Проект 
 - Nginx
 
 ## Подготовка к работе:
-Для работы требуется [poetry](https://python-poetry.org/docs/). 
+Для работы требуется [poetry](https://python-poetry.org/docs/).
 Если ещё не установили, это можно сделать командой:
 ```bash
 curl -sSL https://install.python-poetry.org | python -
@@ -45,20 +45,22 @@ poetry shell
 poetry install --extras "tests"
 ```
 > Дополнительные аргументы: `--extras`
-> 
+>
 > `tests` - для установки библиотек тестирования
-> 
+>
 > `debug` - для установки **django-debug-toolbar**
 3. Примените миграции
 ```bash
 python yatube/manage.py migrate
 ```
-4. В файле `/yatube/yatube/settings.py` смените значение переменной 
+4. В файле `/yatube/yatube/settings.py` смените значение переменной
 `STATE` на `local`
 5. Запустите программу
 ```bash
 python yatube/manage.py runserver
 ```
+> После запуска проект будет доступен по адресу: http://localhost:8000 и
+> http://127.0.0.1:8000
 </details>
 
 ---
@@ -66,7 +68,7 @@ python yatube/manage.py runserver
 <details>
     <summary><b>Локально через Docker:</b></summary>
 
-Требуется установленный Docker! Зависимости будут установленны из файла 
+Требуется установленный Docker! Зависимости будут установленны из файла
 `requirements.txt`
 1. Перейдите в папку `infra_local`
 2. Создайте файл `.env`. Например:
@@ -93,9 +95,13 @@ docker compose up -d
 Тесты запускаются локально через консоль командой `pytest` из корня проекта.
 > В файле `/yatube/yatube/settings.py` значение переменной `STATE` должно быть: `local`
 
+Для контроля за кодом используйте pre-commit:
+```bash
+pre-commit install
+```
+
 ## Планы по развитию проекта:
 Проект планируется развивать с целью изучения возможностей Django.
-- Интегрировать CD/CI;
 - Разместить сайт на боевом сервере;
 - Добавить возможность назначать публикациям множественные категории;
 - Реализовать комментарии к публикациям;
