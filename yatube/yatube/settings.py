@@ -4,7 +4,7 @@ from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 
 
-STATE = 'local'
+STATE = 'docker'
 """ STATES:
     'local' - for local development.
     'docker' - for debugging on docker.
@@ -23,7 +23,11 @@ CACHES = {
     }
 }
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "fragments.rasputin.pro",
+    "localhost",
+    "127.0.0.1",
+]
 AUTH_USER_MODEL = "users.User"
 
 INSTALLED_APPS = [
@@ -38,7 +42,7 @@ INSTALLED_APPS = [
     "core.apps.CoreConfig",
     "about.apps.AboutConfig",
     "sorl.thumbnail",
-    # "debug_toolbar",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -49,15 +53,16 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-# INTERNAL_IPS = [
-#     "localhost",
-#     "127.0.0.1",
-#     "[::1]",
-#     "testserver",
-# ]
+INTERNAL_IPS = [
+    # "fragments.rasputin.pro",
+    "localhost",
+    "127.0.0.1",
+    "[::1]",
+    "testserver",
+]
 
 ROOT_URLCONF = "yatube.urls"
 

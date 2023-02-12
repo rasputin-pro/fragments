@@ -189,7 +189,7 @@ name = "django-debug-toolbar"
 version = "3.2.4"
 description = "A configurable set of panels that display various debug information about the current request/response."
 category = "main"
-optional = true
+optional = false
 python-versions = ">=3.6"
 files = [
     {file = "django-debug-toolbar-3.2.4.tar.gz", hash = "sha256:644bbd5c428d3283aa9115722471769cac1bec189edf3a0c855fd8ff870375a9"},
@@ -1034,4 +1034,4 @@ tests = ["pytest-django", "pytest-pythonpath", "pytest", "Faker"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "1dec1aa452b2a82eadff7d5c9e2d6ec4aa236f3c44b4fa55fa0c2ff1a88440a0"
+content-hash = "aad9fb50c3867435b1f3c628726069f0f2ea35065c0d97c8e910dfcf367814f9"
