@@ -2,81 +2,107 @@
 ![Python](https://img.shields.io/badge/python-3670A0?logo=python&logoColor=ffdd54)
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?logo=django&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?logo=sqlite&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?logo=postgresql&logoColor=white)
 ___
 Учебный проект на базе фреймворка **Django** (Frontend & Backend).
 
-Fragments — многопользовательский блог. Проект предоставляет 
-зарегистрированным пользователям публиковать записи, подписываться на 
+Fragments — многопользовательский блог. Проект предоставляет
+зарегистрированным пользователям публиковать записи, подписываться на
 любимых авторов и отмечать понравившиеся публикации.
 
 ## Стек технологий:
 - Python 3.7
 - Django 2.2.28
-- SQLite
+- PostgreSQL
+- Docker
+- Nginx
 
-## Как запустить проект:
-<details>
-    <summary><b>Клонируйте репозиторий</b></summary>
-
-```commandline
+## Подготовка к работе:
+Для работы требуется [poetry](https://python-poetry.org/docs/).
+Если ещё не установили, это можно сделать командой:
+```bash
+curl -sSL https://install.python-poetry.org | python -
+```
+Клонируйте репозиторий и перейдите в директорию проекта
+```bash
 git clone git@github.com:rasputin-pro/fragments.git
-
 cd fragments
 ```
-</details>
 
+## Как запустить проект:
+
+---
 <details>
-    <summary><b>Создайте и активируйте виртуальное окружение</b></summary>
+    <summary><b>Локально через консоль:</b></summary>
 
-```shell
-# Linux/MacOS
-python3 -m venv venv
-source venv/bin/activate
-python3 -m pip install --upgrade pip
-
-# Windows
-python -m venv venv
-source venv/scripts/activate
-python -m pip install --upgrade pip
+1. Создайте и активируйте виртуальное окружение
+```bash
+poetry config virtualenvs.in-project true
+poetry shell
 ```
-> В проекте используется **Python** версии **3.7**
-</details>
-
-<details>
-    <summary>
-        <b>Установите зависимости из файла <code>requirements.txt</code></b>
-    </summary>
-
-```shell
-pip install -r requirements.txt
+2. Установите зависимости
+```bash
+poetry install --extras "tests"
 ```
-</details>
-
-<details>
-    <summary><b>Примените миграции</b></summary>
-
-```shell
-# Linux/MacOS
-python3 yatube/manage.py migrate
-
-# Windows
+> Дополнительные аргументы: `--extras`
+>
+> `tests` - для установки библиотек тестирования
+>
+> `debug` - для установки **django-debug-toolbar**
+3. Примените миграции
+```bash
 python yatube/manage.py migrate
 ```
+4. В файле `/yatube/yatube/settings.py` смените значение переменной
+`STATE` на `local`
+5. Запустите программу
+```bash
+python yatube/manage.py runserver
+```
+> После запуска проект будет доступен по адресу: http://localhost:8000 и
+> http://127.0.0.1:8000
 </details>
+
+---
 
 <details>
-    <summary><b>Запустите программу</b></summary>
+    <summary><b>Локально через Docker:</b></summary>
 
-```shell
-python3 yatube/manage.py runserver
+Требуется установленный Docker! Зависимости будут установленны из файла
+`requirements.txt`
+1. Перейдите в папку `infra_local`
+2. Создайте файл `.env`. Например:
+```dotenv
+SECRET_KEY='e)g}6wSknB%G1T/LY^E)#tFd@2cq@(6m^}.c2{7wP88#^-uFZ.'
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=fGYWqrGsEQojcDg8
+DB_HOST=db
+DB_PORT=5432
 ```
+3. В файле `/yatube/yatube/settings.py` смените значение переменной `STATE` на `docker`
+4. Выполните команду:
+```bash
+docker compose up -d
+```
+> После запуска проект будет доступен по адресу: http://localhost
 </details>
+
+---
+
+## Тестирование:
+Тесты запускаются локально через консоль командой `pytest` из корня проекта.
+> В файле `/yatube/yatube/settings.py` значение переменной `STATE` должно быть: `local`
+
+Для контроля за кодом используйте pre-commit:
+```bash
+pre-commit install
+```
 
 ## Планы по развитию проекта:
 Проект планируется развивать с целью изучения возможностей Django.
-- Интегрировать pre_commit, PostgreSQL, CD/CI;
 - Разместить сайт на боевом сервере;
 - Добавить возможность назначать публикациям множественные категории;
 - Реализовать комментарии к публикациям;
 - ...
-
