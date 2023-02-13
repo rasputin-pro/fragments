@@ -47,8 +47,6 @@ poetry install --extras "tests"
 > Дополнительные аргументы: `--extras`
 >
 > `tests` - для установки библиотек тестирования
->
-> `debug` - для установки **django-debug-toolbar**
 3. Примените миграции
 ```bash
 python yatube/manage.py migrate
