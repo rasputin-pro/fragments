@@ -4,7 +4,7 @@ from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 
 
-STATE = 'docker'
+STATE = 'production'
 """ STATES:
     'local' - for local development.
     'docker' - for debugging on docker.
