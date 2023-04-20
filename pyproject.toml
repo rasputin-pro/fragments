@@ -28,6 +28,7 @@ asgiref = { version = "3.5.2", optional = true }
 
 
 [tool.poetry.group.dev.dependencies]
+django-stubs = "^1.16.0"
 pre-commit = "^2.20.0"
 isort = "^5.11.3"
 flake8 = "^5.0.4"
